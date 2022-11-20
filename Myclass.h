@@ -4,12 +4,14 @@
 //头文件用于定义一个类
 class library{
     public:
+        library();
+        ~library();//必须放在public
         int realtime_pupularity;
         bool open;
         void nameit(char[]);
         void showname();
         void showcapacity();
-        void changecap();
+        void changecap(int);
         
 
 
@@ -21,6 +23,6 @@ class library{
 #endif
 
 //变量是可以重复声明的
-extern int a;
-extern int a;
-extern int a;
+//extern int a;
+//extern int a;
+//extern int a;
