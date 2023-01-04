@@ -6,18 +6,22 @@ int main()
     int count = 1;
     int max=0;
     int size = strlen(s);
-    for(int i = 0;i<size;i++){
+    int i,j;
+    int index;
+    for(i = 0;i<size;i++){
         count=1;
-        for(int j = 1;j<i-1&&j<size - i -1;j++){
+        for(j = 1;j<i-1&&j<size - i -1;j++){
             if(s[i-j]==s[i+j])
                 count+=2;
         }
         if(count>max){
+            index = i;
             max^=count;
             count^=max;
             max^=count;
         }
     }
-    printf("%d\n",max);
+    char b = &s[index];
+
     return 0;
 }
