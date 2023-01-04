@@ -33,6 +33,7 @@ private:
     int Department;
 public:
     UnderGraduate(const char *name, int age, int proted, int Dep);
+    //直接重写
     bool Prize() {
                                             //可以调用基类的函数，再覆盖
         cout << "He/She was Prized : " << Student::Prize() << endl;

@@ -44,9 +44,11 @@ class BinTree{
     protected:
         BinNode<Element>* root;//root Node
         //为了能够递归访问
-        void rpreprint(BinNode<Element>* root);
-        BinNode<Element> *rfindX(Element X, BinNode<Element>* root);
-        void rprint(BinNode<Element>* root,int depth);
+        void rpreprint(BinNode<Element>* root);//前序遍历
+        void rin_print(BinNode<Element>* root); //中序遍历
+        BinNode<Element> *rfindX(Element X, BinNode<Element>* root);//前序查找
+        void rprint(BinNode<Element>* root,int depth);//格式打印
+
 
     public:
     //construct
@@ -61,7 +63,10 @@ class BinTree{
     //前序遍历
         void preprint();
 
-    //普通遍历
+    //中序遍历
+        void in_print();
+
+    //格式打印
         void print(){
         rprint(root,0);
         }
@@ -122,7 +127,22 @@ void BinTree<Element>::preprint(){
     cout<<endl;
 }
 
-//
+//中序遍历
+template<class Element>
+void BinTree<Element>::rin_print(BinNode<Element> *root) {
+    if(!root)
+        return;
+    rin_print(root->left);
+    cout<<root->data<<" ";
+    rin_print(root->right);
+
+}
+template<class Element>
+void BinTree<Element>::in_print() {
+    //嵌套调用
+    rin_print(root);
+}
+
 
 
 //find,找到位置才能插入
@@ -151,10 +171,14 @@ template<class Element>
 bool BinTree<Element>::insert(Element p, int position, Element insert_value){
     BinNode<Element> *found = findX(p);
     //如果没找到，说明没有这个节点
-    if(!found) return false;
+    if(!found)
+    {
+        cout<<"Insert position not found\n";
+        return false;
+    }
 
     //position 1 左边;左边有值
-    if(position&&root->left){
+    if(position&&found->left){
         cout<<"left have already have node"<<endl;
         return false;
     }else if(position){//左边没有值,可以插入
@@ -162,7 +186,8 @@ bool BinTree<Element>::insert(Element p, int position, Element insert_value){
         return true;
     }
 
-    if(!position&&root->right){
+    //position 0 is right
+    if(found->right&&!position){
         cout<<"right have already have node"<<endl;
         return false;
     }else if(!position){//左边没有值,可以插入
@@ -177,12 +202,24 @@ bool BinTree<Element>::insert(Element p, int position, Element insert_value){
 int main()
 {
     BinTree<int> bt(11);
-    bt.insert(11,0,22);
-    bt.insert(11,1,33);
+    bt.insert(11,1,22);
+    bt.insert(11,0,33);
+
+    bt.insert(22,1,44);
+    bt.insert(22,0,55);
+
+    bt.insert(33,1,66);
+    bt.insert(33,0,77);
+
     //访问
+    cout<<"pre print\n";
     bt.preprint();
     cout<<"simple print:"<<endl;
     bt.print();
+
+    cout<<"in print\n";
+    bt.in_print();
+
 
 
 
