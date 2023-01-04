@@ -48,8 +48,6 @@ class BinTree{
         void rin_print(BinNode<Element>* root); //中序遍历
         BinNode<Element> *rfindX(Element X, BinNode<Element>* root);//前序查找
         void rprint(BinNode<Element>* root,int depth);//格式打印
-
-
     public:
     //construct
         BinTree(){root=NULL;}
@@ -59,23 +57,16 @@ class BinTree{
         }
     //destruct
         ~BinTree(){}
-
     //前序遍历
         void preprint();
-
     //中序遍历
         void in_print();
-
     //格式打印
         void print(){
         rprint(root,0);
         }
-
     //find
         BinNode<Element> * findX(Element X);
-
-
-
     //插入节点:
     //       在哪一个节点之下插入节点，
     //       是左还是右边
@@ -119,7 +110,6 @@ void BinTree<Element>::rpreprint(BinNode<Element>* r) {
     rpreprint(r->left);
     rpreprint(r->right);
 }
-
 template<class Element>
 void BinTree<Element>::preprint(){
     //嵌套调用
@@ -143,8 +133,6 @@ void BinTree<Element>::in_print() {
     rin_print(root);
 }
 
-
-
 //find,找到位置才能插入
 template<class Element>
 BinNode<Element> * BinTree<Element>::rfindX(Element X,BinNode<Element> *root) {
@@ -163,8 +151,6 @@ template<class Element>
 BinNode<Element> * BinTree<Element>::findX(Element X) {
     return rfindX(X,root);
 }
-
-
 
 //插入
 template<class Element>

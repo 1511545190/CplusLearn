@@ -1,27 +1,47 @@
 #include <stdio.h>
 #include <string.h>
+#define N 10
+#define M 5
 int main()
 {
-    char s[100] = "1233345654311";
+
+    int i; //循环变量
     int count = 1;
-    int max=0;
-    int size = strlen(s);
-    int i,j;
-    int index;
-    for(i = 0;i<size;i++){
-        count=1;
-        for(j = 1;j<i-1&&j<size - i -1;j++){
-            if(s[i-j]==s[i+j])
-                count+=2;
-        }
-        if(count>max){
-            index = i;
-            max^=count;
-            count^=max;
-            max^=count;
-        }
+    int arry[N][M];
+
+    /*循环中的变量*/
+    int start = 0;       //行标起始点(关键点）
+    int row_end = N -1;  //行尾下标
+    int column_end = M -1; //列尾下标
+
+    while(count<=N*M) { //循环条件
+        for (i = start; i < column_end +1; i++)
+            arry[start][i] = count++;
+
+        for (i = start + 1; i < row_end +1; i++)
+            arry[i][column_end] = count++;
+
+        for (i = column_end - 1; i >= start; i--)
+            arry[row_end][i] = count++;
+
+        for (i = row_end -1; i >= start + 1; i--)
+            arry[i][start] = count++;
+
+        start++;
+        column_end--;
+        row_end--;
     }
-    char b = &s[index];
+
+    //打印数组
+    for(i =0;i<N;++i){
+        for(int j=0;j<M;++j){
+            printf("%-4d ",arry[i][j]);
+        }
+        printf("\n");
+    }
+
+
+
 
     return 0;
 }
