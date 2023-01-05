@@ -13,11 +13,11 @@ using namespace std;
 //Basis
 class Student{
 protected:
-    //派生类——中———也可以访问
+    //派生类成员函数——中———也可以访问
     //main中不能直接访问
     int prote;
 
-private://派生类可以继承，不能访问
+private://派生类不可以继承，不能访问
     string Name;
     int Age;
 
@@ -30,6 +30,7 @@ public:
 
 class UnderGraduate:public Student{
 private:
+    //char prote; 可以重写
     int Department;
 public:
     UnderGraduate(const char *name, int age, int proted, int Dep);
@@ -37,9 +38,10 @@ public:
     bool Prize() {
                                             //可以调用基类的函数，再覆盖
         cout << "He/She was Prized : " << Student::Prize() << endl;
-        cout<< "Student protected: "<<Student::prote<<endl;
+        cout<< "Student protected: "<<prote<<endl;
         //cout <<" Student private: " <<Student::Name<<endl;
         /*私有不可以访问*/
+        //prote; char
 
     }
     bool IsAssistant();
