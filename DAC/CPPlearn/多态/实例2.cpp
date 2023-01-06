@@ -55,23 +55,25 @@ public:
 };
 
 #define SHAPES_NUMBER 100
+
 //s1 s2 指向 数组元素（指针类型），所以属于指针的指针
 //这里的形式参数是编译器给的指针
-int MyCompare(const void * const s1, const void * const s2){
-    double a1,a2;
-    CShape**p1,**p2;
-    p1=(CShape**)s1;  //强制转换为二级指针才能对 *s1
-    p2=(CShape**)s2;
+int MyCompare(const void *const s1, const void *const s2) {
+    double a1, a2;
+    CShape **p1, **p2;
+    p1 = (CShape **) s1;  //强制转换为二级指针才能对 *s1
+    p2 = (CShape **) s2;
 
     a1 = (*p1)->Area();
     a2 = (*p2)->Area();
-    if(a1<a2)
+    if (a1 < a2)
         return -1;
-    else if(a2<a1)
+    else if (a2 < a1)
         return 1;   //若a2 > a1 则交换
     else
         return 0;
 }
+
 int main() {
     //输入几何形体的个数
     int number_of_shapes;
@@ -114,8 +116,8 @@ int main() {
     }
 
     //qsort 排序 起始，+n ，每个元素的大小
-    qsort(pShapes,number_of_shapes,sizeof (CShape*), MyCompare);
-    for(int i=0;i<number_of_shapes;i++)
+    qsort(pShapes, number_of_shapes, sizeof(CShape *), MyCompare);
+    for (int i = 0; i < number_of_shapes; i++)
         pShapes[i]->PrintInfo();
     return 0;
 }
