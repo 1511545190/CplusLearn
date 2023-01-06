@@ -2,6 +2,7 @@
 // Created by 刘日亮 on 2023/1/4.
 //
 #include <iostream>
+
 using namespace std;
 /*怪物之间可以互相攻击
  *怪物被攻击之后可以反击
@@ -14,36 +15,42 @@ using namespace std;
 
 /*多态的实现方法*/
 //基类和派生类都需要virtual(同名虚函数）
-class CCreatrure{
+class CCreatrure {
 private://私有，不继承
 
 protected://派生类函数中可以访问
-    int m_nLifeValue,m_nPower;
+    int m_nLifeValue, m_nPower;
 public:
     virtual void HurtEd(int EnemyPower);
-    virtual void Attack(CCreatrure* enemy);
-    virtual void FightBack(CCreatrure* enemy);
+
+    virtual void Attack(CCreatrure *enemy);
+
+    virtual void FightBack(CCreatrure *enemy);
 };
 
-class CDragon:public CCreatrure{
+class CDragon : public CCreatrure {
 public:
     virtual void HurtEd(int EnemyPower);
-    virtual void Attack(CCreatrure* enemy);
-    virtual void FightBack(CCreatrure* enemy);
+
+    virtual void Attack(CCreatrure *enemy);
+
+    virtual void FightBack(CCreatrure *enemy);
 };
+
 void CDragon::HurtEd(int EnemyPower) {
-    m_nLifeValue-=EnemyPower;
+    m_nLifeValue -= EnemyPower;
 }
+
 void CDragon::Attack(CCreatrure *enemy) {
     enemy->HurtEd(m_nPower);
     enemy->FightBack(this);
 }
+
 void CDragon::FightBack(CCreatrure *enemy) {
-    enemy->HurtEd(m_nPower/2);
+    enemy->HurtEd(m_nPower / 2);
 }
 
-int main()
-{
+int main() {
     CDragon Dragon;
     CCreatrure A;
     CCreatrure B;
