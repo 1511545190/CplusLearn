@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 100
-#define M 3
+#define M 3  //这里修改行列
 #define N 3
 typedef int T;
 /*
@@ -37,24 +36,13 @@ void PrintMatrix(T (*matrix)[N]) {
         printf("\n");
     }
 }
-
-//矩阵转置
-T *Turn(T *matrix[N]) {
-
-}
-
-//矩阵水平翻转
-
-//矩阵竖直翻转
-
-//矩阵90°旋转（可选顺逆时针）
-
 int main() {
     printf("matrix 1\n");
     T matrix[M][N] = {
             1, 2, 3,
             4, 5, 6,
             7, 8, 9,
+
     };
     PrintMatrix(matrix);
     printf("matrix 2\n");
@@ -62,6 +50,7 @@ int main() {
             1, 1, 0,
             0, 1, 0,
             0, 0, 1,
+
     };
     PrintMatrix(matrix2);
 
@@ -104,11 +93,50 @@ int main() {
                 for (int k = 0; k < m1_n; k++)
                     result[i][j] += (matrix2[i][k] * matrix[k][j]);//每一个元素都有n项
 
-                printf("%-4d",result[i][j]);//即刻输出
+                printf("%-4d", result[i][j]);//即刻输出
             }
             printf("\n");
         }
     //遍历，不能再用print函数
+
+
+
+    //矩阵转置//只有方阵才能原地转化
+    printf("Turn:\n");
+    T turn[100][100] = {0};
+    for (int i = 0; i < m1_m; ++i) {
+        for (int j = 0; j < m1_n; ++j) {
+            //a(i,j) = a(j,i)
+            turn[i][j] = matrix[j][i];
+            printf("%-4d", turn[i][j]);
+        }
+        printf("\n");
+    }
+
+    //竖直翻转
+    printf("Vertical:\n");
+    for (int i = 0; i < m1_m; ++i) {
+        for (int j = 0, j_end = m1_n - 1; j != j_end; ++j, --j_end) {
+            T temp = matrix[i][j];
+            matrix[i][j] = matrix[i][j_end];
+            matrix[i][j_end] = temp;
+        }
+    }
+    PrintMatrix(matrix);
+    //水平翻转
+    printf("Horizontal:\n");
+    for (int i = 0; i < m1_n; ++i) {
+        for (int j = 0, j_end = m1_m - 1; j != j_end; ++j, --j_end) {
+            T temp = matrix[j][i];
+            matrix[j][i] = matrix[j_end][i];
+            matrix[j_end][i] = temp;
+        }
+    }
+    PrintMatrix(matrix);
+    //水平+竖直 = 180°（顺时针）
+    //矩阵乘法也可翻转
+
+    //竖直 + 水平 = 180 °（逆时针)
 
     /*
     printf("result: %d\n",result[0][2]);
