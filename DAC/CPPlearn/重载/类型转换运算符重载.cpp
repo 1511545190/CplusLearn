@@ -8,6 +8,8 @@ class Complex
     double real,imag;
 public:
     Complex(double r=0,double i=0):real(r),imag(i){};
+
+
     operator double (){return real;}
     //重载强制类型转换运算符
     //返回值类型为double
