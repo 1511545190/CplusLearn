@@ -1,6 +1,6 @@
 //
 // Created by 刘日亮 on 2023/1/8.
-//
+// windows 斌不是文本文件，那么要用ios::binary ,
 #include <fstream>//包含头文件
 #include<iostream>
 #include <vector>
@@ -132,6 +132,7 @@ void RBW() {
 
     //记录从0开始编号
     iofile.seekp(2 * sizeof(student), ios::beg);//写指针移动
+    //！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
     iofile.write("Mike", strlen("Mike") + 1);//+1 将/0写了进去，形成字符串
 
     iofile.seekg(0, ios::beg);//读指针定位到文件开头
@@ -141,9 +142,36 @@ void RBW() {
     iofile.close();
 }
 
-int main() {
+void MyCopy(int argc, char* argv[]){
+    if(argc !=3){//命令行参数的个数，包括程序本身
+        cout<<"File name missing"<<endl;
+        return;
+    }
+    ifstream src(argv[1],ios::binary|ios::in);
+    ofstream des(argv[2],ios::binary|ios::out);
+    if(!des){
+        cout<<"cant open\n";
+        return;}
+
+    //读写循环
+    char temp;
+    while(src.get(temp))
+        des.put(temp);
+
+    src.close();
+    des.close();
+    return;
+
+
+
+}
+
+int main(int argc,char * argv[]) {
 
 //    stu_binary();
 //    RBW();
+
+    MyCopy(argc,argv);
+    return 0;
 
 }
