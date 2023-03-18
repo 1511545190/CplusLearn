@@ -19,12 +19,15 @@ int main()
     int a1[] = {1,2,3,4,5,6,7,8,9,10,};
     int a2[] = {100,2,8,32,55,44,33,1,3,5,};
     vector<int> v(a1,a1+SIZE);
+    //
     ostream_iterator<int> output(cout, " ");
+
     random_shuffle(v.begin(),v.end());
     cout<<endl<<"1)";
     //
     copy(v.begin(),v.end(),output);
     copy(a2,a2+SIZE,v.begin());
+
     cout<<endl<<"2)";
     cout<<count(v.begin(),v.end(),8);
     cout<<endl<<"3)";
